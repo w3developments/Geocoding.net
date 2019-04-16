@@ -97,6 +97,8 @@ namespace Geocoding.Microsoft.Json
 		public Address Address { get; set; }
 		[DataMember(Name = "confidence")]
 		public string Confidence { get; set; }
+		[DataMember(Name = "matchCodes")]
+		public string[] MatchCodes { get; set; }
 	}
 	[DataContract]
 	public class Point : Shape
@@ -124,7 +126,7 @@ namespace Geocoding.Microsoft.Json
 		public Link[] Link { get; set; }
 		[DataMember(Name = "point")]
 		public Point Point { get; set; }
-		[DataMember(Name = "boundingBox")]
+		[DataMember(Name = "bbox")]
 		public BoundingBox BoundingBox { get; set; }
 	}
 	[DataContract]

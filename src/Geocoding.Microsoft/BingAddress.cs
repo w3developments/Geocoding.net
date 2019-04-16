@@ -5,6 +5,7 @@
 		readonly string addressLine, adminDistrict, adminDistrict2, countryRegion, locality, neighborhood, postalCode;
 		readonly EntityType type;
 		readonly ConfidenceLevel confidence;
+		readonly MatchCode[] matchCodes;
 
 		public string AddressLine
 		{
@@ -51,8 +52,13 @@
 			get { return confidence; }
 		}
 
+		public MatchCode[] MatchCodes
+		{
+			get { return matchCodes; }
+		}
+
 		public BingAddress(string formattedAddress, Location coordinates, string addressLine, string adminDistrict, string adminDistrict2,
-			string countryRegion, string locality, string neighborhood, string postalCode, EntityType type, ConfidenceLevel confidence)
+			string countryRegion, string locality, string neighborhood, string postalCode, EntityType type, ConfidenceLevel confidence, MatchCode[] matchCodes)
 			: base(formattedAddress, coordinates, "Bing")
 		{
 			this.addressLine = addressLine;
@@ -64,6 +70,7 @@
 			this.postalCode = postalCode;
 			this.type = type;
 			this.confidence = confidence;
+			this.matchCodes = matchCodes;
 		}
 	}
 }

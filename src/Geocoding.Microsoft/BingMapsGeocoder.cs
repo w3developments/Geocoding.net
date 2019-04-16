@@ -221,7 +221,8 @@ namespace Geocoding.Microsoft
 					location.Address.Neighborhood,
 					location.Address.PostalCode,
 					(EntityType)Enum.Parse(typeof(EntityType), location.EntityType),
-					EvaluateConfidence(location.Confidence)
+					EvaluateConfidence(location.Confidence),
+					EvaluateMatchCodes(location.MatchCodes)
 				));
 			}
 
@@ -269,6 +270,34 @@ namespace Geocoding.Microsoft
 				default:
 					return ConfidenceLevel.Unknown;
 			}
+		}
+
+		private MatchCode[] EvaluateMatchCodes(string[] matchCodes)
+		{
+			var matchCodesArray = new MatchCode[] { };
+			var index = 0;
+
+			foreach (var matchCode in matchCodes)
+			{
+				switch (matchCode.ToLower())
+				{
+					case "good":
+						matchCodesArray[index] = MatchCode.Good;
+						break;
+					case "ambiguous":
+						matchCodesArray[index] = MatchCode.Ambiguous;
+						break;
+					case "uphierarchy":
+						matchCodesArray[index] = MatchCode.UpHierarchy;
+						break;
+					default:
+						matchCodesArray[index] = MatchCode.Unknown;
+						break;
+				}
+				index++;
+			}
+
+			return matchCodesArray;
 		}
 
 		private string BingUrlEncode(string toEncode)
