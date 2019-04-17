@@ -274,7 +274,7 @@ namespace Geocoding.Microsoft
 
 		private MatchCode[] EvaluateMatchCodes(string[] matchCodes)
 		{
-			var matchCodesArray = new MatchCode[] { };
+			var matchCodesList = new List<MatchCode>();
 			var index = 0;
 
 			foreach (var matchCode in matchCodes)
@@ -282,22 +282,22 @@ namespace Geocoding.Microsoft
 				switch (matchCode.ToLower())
 				{
 					case "good":
-						matchCodesArray[index] = MatchCode.Good;
+						matchCodesList.Add(MatchCode.Good);
 						break;
 					case "ambiguous":
-						matchCodesArray[index] = MatchCode.Ambiguous;
+						matchCodesList.Add(MatchCode.Ambiguous);
 						break;
 					case "uphierarchy":
-						matchCodesArray[index] = MatchCode.UpHierarchy;
+						matchCodesList.Add(MatchCode.UpHierarchy);
 						break;
 					default:
-						matchCodesArray[index] = MatchCode.Unknown;
+						matchCodesList.Add(MatchCode.Unknown);
 						break;
 				}
 				index++;
 			}
 
-			return matchCodesArray;
+			return matchCodesList.ToArray();
 		}
 
 		private string BingUrlEncode(string toEncode)
